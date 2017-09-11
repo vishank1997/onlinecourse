@@ -1,0 +1,68 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<div class = "pagehead" style="z-index:1; position: fixed ;width: 100% ;background-color: #f1f1f1; margin-top:0px">
+			<div class = "col-lg-3 ">
+				<img src="/coursera.png" alt="rss feed" width=200px />
+				<% if teacher_signed_in?%>
+				<div class = "col-lg-8" >
+					<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+				</div>
+				<%end%>
+			</div>
+		</div>
+
+<br>
+<br>
+<br>
+<br>
+<div class="col-lg-offset-2 col-lg-10">
+	<h4>Disclaimer: <h4>the course is intialized here all the tutorial videos or lessons can be added from view course option</h4></h4>
+</div>
+<div class="col-lg-8 col-lg-offset-4 " style="width: 33%; background-color: #fafafa;" >
+	<form action="/teacher_add_course/addcourse" method="POST">
+		<h3>Title:</h3>
+		<input type="text" name="course_title" size="34">
+		<br>
+		<h3>Link to course image:</h3>
+		<input type="text" name="course_image" size="34">
+		<br>
+		<h3>Link to teaser Video:</h3>
+		<input type="text" name="course_teaser_video" size="34">
+		<br>
+		<h3>Write course summary:</h3>
+		<textarea name="course_summary" size="34">
+		</textarea>
+		<br>
+		<h3>link to banner image:</h3>
+		<input type="text" name="course_banner_image" size="34">
+		<br>
+		<h3>Pre Requisets:</h3>
+		<textarea name="course_required_knowledge" size="34">
+		</textarea>
+		<br>
+		<h3>FAQ:</h3>
+		<textarea name="course_faq" size="34">
+		</textarea>
+		<br>
+		<h3>Sallybus:</h3>
+		<input type="text" name="course_sallybus" size="34">
+		<br>
+		<h3>Homepage Link:</h3>
+		<input type="text" name="course_homepage" size="34">
+
+		<input type="submit" value = "submit">
+	</form>
+<br>
+<br>
+<br>
+<br>
+
+</div>
+

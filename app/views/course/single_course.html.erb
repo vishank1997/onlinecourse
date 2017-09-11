@@ -1,0 +1,63 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+<div class = "container-fluid">
+	<div class = "row" >
+		<div class = "pagehead" style="z-index:1; position: fixed ;width: 100% ;background-color: #f1f1f1; margin-top:0px">
+			<div class = "col-lg-3 ">
+				<img src="/coursera.png" alt="rss feed" width=200px />
+				<% if user_signed_in?%>
+				<div class = "col-lg-8" >
+					<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+				</div>
+				<%end%>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div style="background-image: url("<%= @courses.banner_image %>");>
+			<h3><%= @courses.id %>)  
+			<%= @courses.title %></h3>
+		<% if current_user.enrolled? @courses.id %>
+			<%= form_tag '/course/enroll_now', remote: "true", method: "post" do %>
+			<%= hidden_field_tag :course_id, @courses.id %>
+			<button name="button" type="submit" style="border: none;color:#008CBA; border-radius: 25px;">Enroll</button>
+			<% end %>
+		<% else %>
+			<%= form_tag '/course/unenroll', method: "post", remote: "true" do %>
+			<%= hidden_field_tag :course_id, @courses.id %>
+					<button name="button" type="submit" style="border: none;color:#008CBA; border-radius: 25px;">UnEnroll</button>
+			<% end %>
+		<%end%>
+
+		</div>	
+		<a href= "<%= @courses.homepage %>" >homepage </a>
+		<div>
+		 	<div class="col-lg-5">
+				<iframe width="520" height="315" src="<%= @courses.teaser_video.sub('watch?v=','embed/') %>"  frameborder="0" allowfullscreen></iframe>
+			</div>		 	
+		</div>	
+
+
+		
+		<div class="col-lg-7">
+			<!--
+			<img src="<%= @courses.image %>" height = "42" >
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL9W5T_Bs30cuefu1gaKx1ApPcUN7iGaR7" frameborder="0" allowfullscreen></iframe>
+			-->
+			<pre>
+			<%= @courses.sallybus %>
+			<%= @courses.faq %>
+			</pre>
+		</div>
+
+	</div>
+</div>

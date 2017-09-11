@@ -1,0 +1,66 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<div class = "pagehead" style="z-index:1; position: fixed ;width: 100% ;background-color: #f1f1f1; margin-top:0px">
+		<div class = "col-lg-3 ">
+			<img src="/coursera.png" alt="rss feed" width=200px />
+			<% if user_signed_in?%>
+			<div class = "col-lg-8" >
+				<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+			</div>
+			<%end%>
+		</div>
+</div>
+
+<br>
+<br>
+<br>
+<div id="placeholder" style="color: white; border: 1px solid black; background-image: url('<%=@course.banner_image%>')">
+<div style="padding-left:  50px; padding-right: 50px ">
+<div style="float: right;">
+<iframe width="420" height="215" src="<%= @course.teaser_video.sub('watch?v=','embed/') %>"  frameborder="0" allowfullscreen></iframe>
+</div>
+<!--<h4><%= @user.email %></h4><br>-->
+<h2><%= @course.title %></h2><br>
+<h4><%= @course.required_knowledge %></h4><br>
+<h4><%= @course.sallybus %></h4><br>
+<h4><%= @course.faq %></h4>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<% @lecture.each do |lecture| %>
+<div class="container">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Lecture<%= lecture.id %></button>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+          <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Course <%= @course.title%> lecture<%= lecture.id %></h4>
+        </div>
+        <div class="modal-body">
+			<iframe id=player width="560" height="315" src="<%= lecture.video_link %>"   frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" player.stopvideo() >Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+<br>
+<% end %>

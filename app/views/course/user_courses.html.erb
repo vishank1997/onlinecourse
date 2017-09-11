@@ -1,0 +1,56 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<% #@usercourse.each do |usercourse|%>
+<!--<%= @usercourse %>-->
+<%#end%>
+		<div class = "pagehead" style="z-index:1; position: fixed ;width: 100% ;background-color: #f1f1f1; margin-top:0px">
+			<div class = "col-lg-3 ">
+				<img src="/coursera.png" alt="rss feed" width=200px />
+				<% if user_signed_in?%>
+				<div class = "col-lg-8" >
+					<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+				</div>
+				<%end%>
+			</div>
+		</div>
+
+		<br>
+		<br>	
+		<br>	
+		<br>	
+
+
+	<% @course.each do|course| %>
+	<% if @usercourse.include? course.id%>
+	<% #course.title %>
+<div class="col-lg-4" style="border: solid; border-color: #fcfcfc;" >
+	<form action = "/course/user_course_running" method="GET">
+		<input type="hidden" name="id" value="<%= course.id %>">
+		<!--<%= link_to course.title , '/course/user_course_running' %>-->
+		<h4><%= course.title %></h4>
+		<button type = "submit" style="background-color: white; border: none;" ><img src="<%= course.image %>" height = "150 px" ><br>Start this course</button>
+	</form>
+	
+	<a href= "<%= course.homepage %>" >homepage</a>
+	
+	<!--<%= course.teaser_video %>
+	<%= course.banner_image %>
+	<%= course.required_knowledge %>
+	<%= course.sallybus %>
+	<%= course.faq %>-->
+	<%= form_tag '/course/unenroll', method: "post" ,remote: "true" do %>
+	<%= hidden_field_tag :course_id, course.id %>
+	<button name="button" type="submit" style="border: none;color:#008CBA; border-radius: 25px;" onMouseOver="this.color=red" onMouseOut="this.bgColor='#008CBA'" >UnEnroll</button>
+</div>	
+
+	<% end %>
+	<%end%>
+	<%end%>
